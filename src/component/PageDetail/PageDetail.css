@@ -1,0 +1,22 @@
+.imgg:hover img{
+    opacity:0.3;
+}
+
+.imgg:hover div{
+    opacity:1;
+}
+.line{
+    width:1px;
+    height: 14px;
+    display: inline-block;
+    background: #e6e6e6;
+    margin: 0 10px;
+}
+.price{
+    margin-right: 8px;
+    color: #e60012;   
+}
+.money{
+    
+    font-size: 45px;
+}

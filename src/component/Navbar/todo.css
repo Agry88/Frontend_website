@@ -1,0 +1,28 @@
+.wrapper{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100%;
+    margin: auto;
+}
+.footer{
+    display: flex;
+    background-color: lightblue;
+    position: absolute;
+    bottom: 0;
+}
+.link {
+    color: white
+ }
+.delink {
+    color: red
+}
+.plus-link {
+    color: lightblue;
+}
+.container{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column; 
+}
