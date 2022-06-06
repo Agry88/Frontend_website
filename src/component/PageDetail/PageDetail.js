@@ -32,7 +32,7 @@ const conditions = ['male', 'student', 'officeWorker', 'year']
 
 
 
-const notFoundIcon = "https://cdn-icons.flaticon.com/png/512/4131/premium/4131677.png?token=exp=1654285946~hmac=17fdcd8f951b5e0e95f239ba8afb2c1f"
+const notFoundIcon = "https://cdn-icons-png.flaticon.com/512/2748/2748614.png"
 
 const genderIcon = "https://cdn-icons-png.flaticon.com/512/2324/2324529.png"
 const femaleIcon = "https://cdn-icons.flaticon.com/png/512/2404/premium/2404482.png?token=exp=1654281081~hmac=36025a89fc6972b4787d2a5f7c5270e7"
@@ -240,10 +240,14 @@ function Condition(props) {
     return (
         <Grid item sm={1} md={1}>
             <Paper sx={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', width: '72px', height: '68px', pt: '4px'}}>
-                {icon && 
+                {icon && icon.includes("premium") ?
+                    <Box component={'img'} sx={{width: '32px', height: '32px'}} 
+                    src={notFoundIcon}
+                    /> :
                     <Box component={'img'} sx={{width: '32px', height: '32px'}} 
                     src={icon}
-                    />}
+                    />
+                }
                 <Typography sx={{...textStyle}}>{text}</Typography>
             </Paper>
         </Grid>
