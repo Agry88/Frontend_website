@@ -4,8 +4,10 @@ import BreadCrumbs from "../BreadCrumbs/BreadCrumbs";
 import './PageDetail.css';
 import '../../img/male-gender.png';
 import '../../img/female.png';
-
-
+import Carousels from "./image"; // 幻燈片
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import Cardput from "./Cardput"; // 側邊欄
 
 // 後端傳入資料
 const title = "近慈濟大學大/中/小方便獨立套房" //標題
@@ -25,6 +27,10 @@ const houseType = '透天厝' //房屋類型
 const rentMoney = 6000 //租金
 const securityDeposit = 6000 //押金
 const conditions = ['male', 'student', 'officeWorker', 'year']
+const conditions2 = ['可養寵', '可開火']
+const conditions3 = ['床', '書桌', '冰箱', '冷氣', '熱水器']
+const conditions4 = ['網路', '第四台', '電梯', '車位']
+const conditions5 = ['游泳池', '視聽室']
 
 
 
@@ -67,15 +73,110 @@ const conditionsIcon = {
     family: <Condition text={'家庭'} icon={familyIcon}/>,
     year: <Condition text={'最短租期'} icon={yearIcon}/>,
     month: <Condition text={'最短租期'} icon={monthIcon}/>,
+    '床': <Condition text={'床'} icon={bedIcon}/>,
+    '書桌': <Condition text={'書桌'} icon={deskIcon}/>,
+    '游泳池': <Condition text={'游泳池'} icon={swimmingPoolIcon}/>,
+    '視聽室': <Condition text={'視聽室'} icon={theaterIcon}/>,
+}
+
+function Outline(props) {
+    const { title, tags, roomType, size, floor, houseType, rentMoney, securityDeposit } = props.outlineValue;
+    
+    return (
+        <Stack spacing={1}>
+        <Box>
+            <Typography variant="h5" sx={{fontWeight: 'bold'}}>{title}</Typography>
+        </Box>
+        <Box>
+            {tags.map((tag) => <PostTag content={tag.content} type={tag.type} icon={tag.icon}></PostTag>)}
+        </Box>
+        <Box>
+            <Typography variant="h6">
+                {roomType}
+                <Typography sx={{ display: 'inline-block', backgroundColor: '#afafaf', width: '1px', height: '12px', mx: '6px'}} />
+                {size}坪 
+                <Typography sx={{ display: 'inline-block', backgroundColor: '#afafaf', width: '1px', height: '12px', mx: '6px'}} />
+                {floor}F/{totalFloor}F
+                <Typography sx={{ display: 'inline-block', backgroundColor: '#afafaf', width: '1px', height: '12px', mx: '6px'}} />
+                {houseType}
+            </Typography>
+        </Box>
+        <Box>
+            <Typography sx={{ display: 'inline-block', fontSize: '30px', fontWeight: 'bold', color: '#FF0000'}}>{rentMoney}</Typography>
+            <Typography sx={{ display: 'inline-block', fontSize: '16px', color: '#FF0000', mr: '16px'}}>元/月</Typography>
+            
+            <Typography sx={{ display: 'inline-block'}}>押金{securityDeposit}元</Typography>
+        </Box>
+    </Stack>
+    )
+}
+
+function EquipmentAndServices(props) {
+    const {conditions, conditions2, conditions3, conditions4, conditions5 } = props.equipmentAndServicesValue;
+    return (
+        <Stack spacing={1}>
+            <Box>
+                <Typography variant="h5" sx={{fontWeight: 'bold'}}>設備與服務</Typography>
+            </Box>
+            <Box>
+                <Typography sx={{fontWeight: 'bold', pt: '8px', pl: '16px'}}>租住條件</Typography>
+                <Grid container spacing={1} columns={{ sm: 4, md: 8 }} sx={{p: '4px', pl: '16px'}}>
+                    {conditions.map((condition) => conditionsIcon[condition] ? conditionsIcon[condition] : <Condition text={condition}/> )}
+                </Grid>
+            </Box>
+            <Box>
+                <Typography sx={{fontWeight: 'bold', pt: '8px', pl: '16px'}}>房屋規定</Typography>
+                <Grid container spacing={1} columns={{ sm: 4, md: 8 }} sx={{p: '4px', pl: '16px'}}>
+                    {conditions2.map((condition) => conditionsIcon[condition] ? conditionsIcon[condition] : <Condition text={condition}/> )}
+                </Grid>
+            </Box>
+            <Box>
+                <Typography sx={{fontWeight: 'bold', pt: '8px', pl: '16px'}}>提供設備</Typography>
+                <Grid container spacing={1} columns={{ sm: 4, md: 8 }} sx={{p: '4px', pl: '16px'}}>
+                    {conditions3.map((condition) => conditionsIcon[condition] ? conditionsIcon[condition] : <Condition text={condition}/> )}
+                </Grid>
+            </Box>
+            <Box>
+                <Typography sx={{fontWeight: 'bold', pt: '8px', pl: '16px'}}>提供服務</Typography>
+                <Grid container spacing={1} columns={{ sm: 4, md: 8 }} sx={{p: '4px', pl: '16px'}}>
+                    {conditions4.map((condition) => conditionsIcon[condition] ? conditionsIcon[condition] : <Condition text={condition}/> )}
+                </Grid>
+            </Box>
+            <Box>
+                <Typography sx={{fontWeight: 'bold', pt: '8px', pl: '16px'}}>公共設施</Typography>
+                <Grid container spacing={1} columns={{ sm: 4, md: 8 }} sx={{p: '4px', pl: '16px'}}>
+                    {conditions5.map((condition) => conditionsIcon[condition] ? conditionsIcon[condition] : <Condition text={condition}/> )}
+                </Grid>
+            </Box>
+        </Stack>
+    )
 }
 
 function PageDetail(props) {
+    const outlineValue = {
+        title: title, 
+        tags: tags, 
+        roomType: roomType, 
+        size: size, 
+        floor: floor, 
+        houseType: houseType, 
+        rentMoney: rentMoney, 
+        securityDeposit: securityDeposit
+    }
+    const equipmentAndServicesValue = {
+        conditions: conditions,
+        conditions2: conditions2,
+        conditions3: conditions3,
+        conditions4: conditions4,
+        conditions5: conditions5
+    }
     return (
         <Box sx={{
             backgroundColor: '#7f7f7f',
             mx: '50px',
             minHeight: '1000px'
         }}>
+            {/* 麵包屑 */}
             <Box sx={{
                 width: '100%',
                 backgroundColor: '#0faf0f',
@@ -83,12 +184,13 @@ function PageDetail(props) {
             }}>
                 <BreadCrumbs />
             </Box>
+            {/* 幻燈片 */}
             <Box sx={{
                 width: '100%',
                 backgroundColor: '#0fafaf',
                 minHeight: '300px'
             }}>
-                圖片
+                <Carousels />
             </Box>
             <Box sx={{
                 display: 'flex'
@@ -104,31 +206,7 @@ function PageDetail(props) {
                         backgroundColor: '#ffffff',
                         minHeight: '150px'
                     }}> 
-                        <Stack spacing={1}>
-                            <Box>
-                                <Typography variant="h5" sx={{fontWeight: 'bold'}}>{title}</Typography>
-                            </Box>
-                            <Box>
-                                {tags.map((tag) => <PostTag content={tag.content} type={tag.type} icon={tag.icon}></PostTag>)}
-                            </Box>
-                            <Box>
-                                <Typography variant="h6">
-                                    {roomType}
-                                    <Typography sx={{ display: 'inline-block', backgroundColor: '#afafaf', width: '1px', height: '12px', mx: '6px'}} />
-                                    {size}坪 
-                                    <Typography sx={{ display: 'inline-block', backgroundColor: '#afafaf', width: '1px', height: '12px', mx: '6px'}} />
-                                    {floor}F/{totalFloor}F
-                                    <Typography sx={{ display: 'inline-block', backgroundColor: '#afafaf', width: '1px', height: '12px', mx: '6px'}} />
-                                    {houseType}
-                                </Typography>
-                            </Box>
-                            <Box>
-                                <Typography sx={{ display: 'inline-block', fontSize: '30px', fontWeight: 'bold', color: '#FF0000'}}>{rentMoney}</Typography>
-                                <Typography sx={{ display: 'inline-block', fontSize: '16px', color: '#FF0000', mr: '16px'}}>元/月</Typography>
-                                
-                                <Typography sx={{ display: 'inline-block'}}>押金{securityDeposit}元</Typography>
-                            </Box>
-                        </Stack>
+                        <Outline outlineValue={outlineValue} />
                     </Box>
                     <hr />
                     {/* 設備與服務 */}
@@ -136,61 +214,7 @@ function PageDetail(props) {
                         backgroundColor: '#fff',
                         minHeight: '200px'
                     }}>
-                        <Stack spacing={1}>
-                            <Box>
-                                <Typography variant="h5" sx={{fontWeight: 'bold'}}>設備與服務</Typography>
-                            </Box>
-                            <Box>
-                                <Typography sx={{fontWeight: 'bold', pt: '8px', pl: '16px'}}>租住條件</Typography>
-                                <Grid container spacing={1} columns={{ sm: 4, md: 8 }} sx={{p: '4px', pl: '16px'}}>
-                                    {conditions.map((condition) => conditionsIcon[condition])}
-                                </Grid>
-                            </Box>
-                            <Box>
-                                <Typography sx={{fontWeight: 'bold', pt: '8px', pl: '16px'}}>房屋規定</Typography>
-                                <Grid container spacing={1} columns={{ sm: 4, md: 8 }} sx={{p: '4px', pl: '16px'}}>
-                                    <Condition text={'寵物'} icon={petIcon}/>
-                                    <Condition text={'可開火'} icon={gasStoveIcon}/>
-                                    <Condition text={'不明火'} icon={inductionCookerIcon}/>
-                                </Grid>
-                            </Box>
-                            <Box>
-                                <Typography sx={{fontWeight: 'bold', pt: '8px', pl: '16px'}}>提供設備</Typography>
-                                <Grid container spacing={1} columns={{ sm: 4, md: 8 }} sx={{p: '4px', pl: '16px'}}>
-                                    <Condition text={'床'} icon={bedIcon}/>
-                                    <Condition text={'書桌'} icon={deskIcon}/>
-                                    <Condition text={'椅子'} icon={chairIcon}/>
-                                    <Condition text={'冷氣'} icon={airConditionerIcon}/>
-                                    <Condition text={'熱水器'} icon={waterHeaterIcon}/>
-                                    <Condition text={'洗衣機'} icon={washingMachineIcon}/>
-                                    <Condition text={'冰箱'} icon={refrigeratorIcon}/>
-                                    
-                                    
-                                </Grid>
-                            </Box>
-                            <Box>
-                                <Typography sx={{fontWeight: 'bold', pt: '8px', pl: '16px'}}>提供服務</Typography>
-                                <Grid container spacing={1} columns={{ sm: 4, md: 8 }} sx={{p: '4px', pl: '16px'}}>
-                                    <Condition text={'網路'} icon={notFoundIcon}/>
-                                    <Condition text={'第四台'} icon={notFoundIcon}/>
-                                    <Condition text={'電梯'} icon={notFoundIcon}/>
-                                    <Condition text={'車位'} icon={notFoundIcon}/>
-                                    <Condition text={'代收包裹'} icon={notFoundIcon}/>
-                                    <Condition text={'垃圾集中處'} icon={notFoundIcon}/>
-                                    
-                                    
-                                </Grid>
-                            </Box>
-                            <Box>
-                                <Typography sx={{fontWeight: 'bold', pt: '8px', pl: '16px'}}>公共設施</Typography>
-                                <Grid container spacing={1} columns={{ sm: 4, md: 8 }} sx={{p: '4px', pl: '16px'}}>
-                                    <Condition text={'游泳池'} icon={swimmingPoolIcon}/>
-                                    <Condition text={'視聽室'} icon={theaterIcon}/>
-                                    
-                                    
-                                </Grid>
-                            </Box>
-                        </Stack>
+                        <EquipmentAndServices equipmentAndServicesValue={equipmentAndServicesValue} />
                     </Box>
                     <hr />
                     {/* 位置與週邊 */}
@@ -217,13 +241,14 @@ function PageDetail(props) {
                         屋況詳情
                     </Box>
                 </Box>
+                {/* Sidebar */}
                 <Box sx={{
                     position: 'sticky',
                     width: '40%',
                     backgroundColor: '#afaf0f',
                     minHeight: '500px'
                 }}>
-                    圖片
+                    <Cardput />
                 </Box>
             </Box>
         </Box>
@@ -240,12 +265,12 @@ function Condition(props) {
     return (
         <Grid item sm={1} md={1}>
             <Paper sx={{display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', width: '72px', height: '68px', pt: '4px'}}>
-                {icon && icon.includes("premium") ?
-                    <Box component={'img'} sx={{width: '32px', height: '32px'}} 
-                    src={notFoundIcon}
-                    /> :
+                {(icon && !icon.includes("premium")) ?
                     <Box component={'img'} sx={{width: '32px', height: '32px'}} 
                     src={icon}
+                    /> : 
+                    <Box component={'img'} sx={{width: '32px', height: '32px'}} 
+                    src={notFoundIcon}
                     />
                 }
                 <Typography sx={{...textStyle}}>{text}</Typography>
