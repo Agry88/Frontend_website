@@ -13,7 +13,7 @@ export default function NavBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Box sx={{ flexGrow: 1 }}>
+          <Box sx={{ flexGrow: 1 , textDecoration: 'none' }} color="inherit" component={Link} to="/">
             <IconButton
               size="large"
               edge="start"
@@ -33,7 +33,7 @@ export default function NavBar() {
 
           <Button color="inherit" component={Link} to="RentPages" >租房資料</Button>
 
-          <Button color="inherit"><Link to='/' />登入</Button>
+          <Button color="inherit" component={Link} to="/SignIn">登入</Button>
         </Toolbar>
       </AppBar>
     </Box>
