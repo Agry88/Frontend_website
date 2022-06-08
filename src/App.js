@@ -32,7 +32,7 @@ function App() {
           <Switch>
             <Route exact path='/' component={IndexPage} />
             <Route exact path='/RentPages' component={RentPages} />
-            <Route exact path='/PageDetail' component={PageDetail} />
+            <Route exact path='/PageDetail/:id' component={PageDetail} />
             <Route exact path='/Test/SelectBar' component={SelectBar} />
             <Route exact path="/SignUp" component={SignUp} />
             <Route exact path="/SignIn" component={SignIn} />
