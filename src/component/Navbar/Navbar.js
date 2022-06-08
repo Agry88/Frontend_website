@@ -10,8 +10,8 @@ import { Link } from "react-router-dom";
 
 export default function NavBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box sx={{ flexGrow: 1, mb: '32px' }}>
+      <AppBar position="fixed">
         <Toolbar>
           <Box sx={{ flexGrow: 1 , textDecoration: 'none' }} color="inherit" component={Link} to="/">
             <IconButton
