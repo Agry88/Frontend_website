@@ -9,13 +9,14 @@ import NavBar from './component/Navbar/Navbar';
 import SignUp from "./component/SignUp/signup";
 import SignIn from "./component/SignIn/signin";
 import Footer from './component/Footer/Footer';
+import AddRentPages from './component/AddRentPages/AddRentPages';
 function App() {
   return (
     <HashRouter>
       <Box
         sx={{
           width: "auto",
-          minHeight: 950,
+          minHeight: "100vh",
         }}>
         <Box fullWidth
           sx={{
@@ -32,6 +33,7 @@ function App() {
           <Switch>
             <Route exact path='/' component={IndexPage} />
             <Route exact path='/RentPages' component={RentPages} />
+            <Route exact path='/AddRentPages' component={AddRentPages} />
             <Route exact path='/PageDetail/:id' component={PageDetail} />
             <Route exact path='/Test/SelectBar' component={SelectBar} />
             <Route exact path="/SignUp" component={SignUp} />
