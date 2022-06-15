@@ -1,7 +1,8 @@
 import React from 'react'
-import { Box,Card,CardContent,Typography,Avatar,Grid,Button} from '@mui/material';
+import { Box,Card,CardContent,Typography,Avatar,Grid,Button,Tooltip} from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
 import Line from'./icons8-line.svg';
+import {QRCodeSVG} from 'qrcode.react';
 export default function Cardput(props) {
     const {landlordStatus, landlordNickName, phoneNumber, lineAddress} = props.landlord;
     const displayPhoneNumber = `${phoneNumber.substring(0,4)}-${phoneNumber.substring(4,7)}-${phoneNumber.substring(7)}`;
@@ -29,7 +30,7 @@ export default function Cardput(props) {
             backgroundColor: '#ffffff',
             minHeight: '1000px'
         }}>
-            <Card >
+            <Card sx={{maxWidth:566}}>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         <Grid container spacing={0}>
@@ -43,20 +44,31 @@ export default function Cardput(props) {
                             <Grid item sx={{mt:3,fontSize:20}}>
                                 {landlordType}：{landlordNickName}
                             </Grid>
+                            <Grid item  sx={{mt:2,ml:10,fontSize:20}}>
+                                <Tooltip title={<QRCodeSVG value={displayPhoneNumber}/>}>
+                                    <Button size="medium" sx={{color:'white',borderRadius: 1,bgcolor:'#ff8000',':hover': {
+                                        bgcolor: '#ff8000', // theme.palette.primary.main
+                                        color: 'white',
+                                        }}} ><PhoneIcon/>{displayPhoneNumber}</Button>
+                                </Tooltip>
+                            </Grid>
+                            <Grid item  sx={{mt:2,ml:3,fontSize:10 , minWidth:120}}>
+                                <Tooltip title={<QRCodeSVG value="http://line.me/ti/p/~qwe910108"/>}>
+                                    <Button size="medium" fullWidth sx={{color:'white',borderRadius: 1,bgcolor:'#23ba4f',':hover': {
+                                        bgcolor: '#23ba4f', // theme.palette.primary.main
+                                        color: 'white',
+                                        }}} ><img src={Line} width="24" height="24"alt="React Logo" />LINE</Button>
+                                </Tooltip>
+                            </Grid>
+                            
                         </Grid>     
                     </Typography>
-                    <Typography variant="h5" component="div">
-                    
+                    <Typography variant="body2" gutterBottom>
+                        body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
+                        blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,
+                        neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum
+                        quasi quidem quibusdam.
                     </Typography>
-                    <Button size="medium"fullWidth sx={{color:'white',borderRadius: 1,bgcolor:'#ff8000',mb:1,':hover': {
-                        bgcolor: '#ff8000', // theme.palette.primary.main
-                        color: 'white',
-                        }}} ><PhoneIcon/>{displayPhoneNumber}</Button>
-                    <Button size="medium"fullWidth sx={{color:'white',borderRadius: 1,bgcolor:'#23ba4f',':hover': {
-                        bgcolor: '#23ba4f', // theme.palette.primary.main
-                        color: 'white',
-                        }}} ><img src={Line} alt="React Logo" />LINE</Button>
-            
                 </CardContent>
             </Card>
         </Box>

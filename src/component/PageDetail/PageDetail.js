@@ -139,6 +139,7 @@ function Outline(props) {
             <Typography sx={{ display: 'inline-block', fontSize: '16px', color: '#FF0000', mr: '16px'}}>元/月</Typography>
             
             <Typography sx={{ display: 'inline-block'}}>押金{securityDeposit}元</Typography>
+            
         </Box>
     </Stack>
     )
@@ -342,7 +343,7 @@ function PageDetail(props) {
                         backgroundColor: '#e8aaef',
                         minHeight: '500px'
                     }}>
-                        屋況介紹
+                         <Cardput landlord={landlordValue} />
                     </Box>
                 </Box>
                 {/* Sidebar */}

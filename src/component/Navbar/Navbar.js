@@ -31,9 +31,9 @@ export default function NavBar() {
 
           <Button color="inherit" component={Link} to="/">首頁</Button>
 
-          <Button color="inherit" component={Link} to="RentPages" >租房資料</Button>
+          <Button color="inherit" component={Link} to="/RentPages" >租房資料</Button>
 
-          <Button color="inherit" component={Link} to="AddRentPages" >刊登房屋</Button>
+          <Button color="inherit" component={Link} to="/AddRentPages" >刊登房屋</Button>
 
           <Button color="inherit" component={Link} to="/SignIn">登入</Button>
         </Toolbar>
