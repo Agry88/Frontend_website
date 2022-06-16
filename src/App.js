@@ -12,6 +12,7 @@ import Footer from './component/Footer/Footer';
 import AddRentPages from './component/AddRentPages/AddRentPages';
 
 import cityCountyData from './data/CityCountyData.json';
+import MemberDetail from './component/MemberDetail/MemberDetail';
 const cityData = Object.fromEntries(cityCountyData.map((city) => [city.CityName, city.AreaList]))
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
             <Route exact path='/AddRentPages' >
               <AddRentPages cityData={cityData} />
             </Route>
+            <Route exact path='/MemberDetail' component={MemberDetail} />
             <Route exact path='/PageDetail/:id' component={PageDetail} />
             <Route exact path='/Test/SelectBar' component={SelectBar} />
             <Route exact path="/SignUp" component={SignUp} />
