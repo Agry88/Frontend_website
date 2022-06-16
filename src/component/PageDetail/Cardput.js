@@ -28,7 +28,7 @@ export default function Cardput(props) {
     return (
         <Box sx={{
             backgroundColor: '#ffffff',
-            minHeight: '1000px'
+
         }}>
             <Card sx={{maxWidth:566}}>
                 <CardContent>

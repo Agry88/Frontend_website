@@ -150,7 +150,7 @@ function EquipmentAndServices(props) {
     return (
         <Stack spacing={1}>
             <Typography variant="h5" sx={{fontWeight: 'bold', pb: 1}}>設備與服務</Typography>
-            <Box sx={{ borderLeft: 1}}>
+       
                 <Box sx={{ pb: 1 }}>
                     <Typography sx={{fontWeight: 'bold', pb: '2px', pl: '16px'}}>租住條件</Typography>
                     <Grid container spacing={1} columns={{ sm: 6, md: 8 }} sx={{p: '4px', pl: '16px'}}>
@@ -181,7 +181,7 @@ function EquipmentAndServices(props) {
                         {conditions.e.map((condition) => <Condition text={condition} icon={icons[condition]}/> )}
                     </Grid>
                 </Box>
-            </Box>
+            
         </Stack>
     )
 }
@@ -213,7 +213,6 @@ function PageDetail(props) {
         <Box sx={{
             backgroundColor: '#ffffff',
             mx: '50px',
-            minHeight: '1000px',
             position: 'relative',
         }}>
             {/* 麵包屑 */}
@@ -234,17 +233,17 @@ function PageDetail(props) {
             </Box>
             <Box sx={{
                 display: 'flex',
+                height:"1200px"
             }}>
                 <Box sx={{
                     flexGrow: 1,
                     backgroundColor: '#ffffff',
-                    minHeight: '500px',
                     p: 1
                 }}>
                     {/* 租屋大標 */}
                     <Box fullWidth sx={{
                         backgroundColor: '#ffffff',
-                        minHeight: '150px'
+                 
                     }}> 
                         <Outline outlineValue={outlineValue} />
                     </Box>
@@ -252,7 +251,7 @@ function PageDetail(props) {
                     {/* 屋況詳情 */}
                     <Box fullWidth sx={{
                         backgroundColor: '#ffffff',
-                        minHeight: '200px'
+                    
                     }}>
                         <Typography variant="h5" sx={{fontWeight: 'bold', pb: 1}}>屋況詳情</Typography>
                         <Grid container spacing={0}>
@@ -327,7 +326,7 @@ function PageDetail(props) {
                     {/* 位置與週邊 */}
                     <Box fullWidth sx={{
                         backgroundColor: '#ffffff',
-                        minHeight: '200px'
+                   
                     }}>
                         <Typography variant="h5" sx={{fontWeight: 'bold', pb: 1}}>位置與週邊</Typography>
                         <Box sx={{ p: 1 }}>
@@ -341,7 +340,7 @@ function PageDetail(props) {
                     {/* 屋況介紹 */}
                     <Box fullWidth sx={{
                         backgroundColor: '#e8aaef',
-                        minHeight: '500px'
+                
                     }}>
                          <Cardput landlord={landlordValue} />
                     </Box>
@@ -351,10 +350,10 @@ function PageDetail(props) {
                     position: 'sticky',
                     width: '50%',
                     backgroundColor: '#ffffff',
-                    minHeight: '500px',
-                    p: 1
-                }}>
-                <EquipmentAndServices equipmentAndServicesValue={equipmentAndServicesValue} />
+                    p: 1,
+                    borderLeft:1
+                }}>                  
+                    <EquipmentAndServices equipmentAndServicesValue={equipmentAndServicesValue} />
                     {/* <Cardput landlord={landlordValue} /> */}
                 </Box>
             </Box>
