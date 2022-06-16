@@ -1,5 +1,5 @@
 
-import { Box, Grid, Stack, Paper, Typography, Link } from '@mui/material';
+import { Box, Grid, Stack, Paper, Typography, Link,Card,CardContent } from '@mui/material';
 import BreadCrumbs from "../BreadCrumbs/BreadCrumbs";
 import './PageDetail.css';
 import '../../img/male-gender.png';
@@ -234,7 +234,7 @@ function PageDetail(props) {
             </Box>
             <Box sx={{
                 display: 'flex',
-                height:"1000px",
+                height:"1500px",
        
             }}>
                 <Box sx={{
@@ -318,13 +318,13 @@ function PageDetail(props) {
                     </Box>
                     <hr />
                     {/* 設備與服務 */}
-                    {/* <Box fullWidth sx={{
+                    <Box fullWidth sx={{
                         backgroundColor: '#fff',
                         minHeight: '200px'
                     }}>
                         <EquipmentAndServices equipmentAndServicesValue={equipmentAndServicesValue} />
                     </Box>
-                    <hr /> */}
+                    <hr />
                 
                     {/* 屋況介紹 */}
                     <Box fullWidth sx={{
@@ -332,7 +332,26 @@ function PageDetail(props) {
 
                         
                     }}>
-                         <Cardput landlord={landlordValue} />
+                        <Card sx={{maxWidth:700,minHeight:500}}>
+                            <CardContent>
+                                <Typography variant="h4">屋主說 :</Typography>
+                                <Typography mt={3} ml={3} variant="h6"  gutterBottom sx={{bgcolor:'#f1f1f1'}}>
+                                    body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
+                                    blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,
+                                    neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum
+                                    quasi quidem quibusdam.
+                                    body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
+                                    blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,
+                                    neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum
+                                    quasi quidem quibusdam.
+                                    body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
+                                    blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,
+                                    neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum
+                                    quasi quidem quibusdam.
+                                    </Typography>
+                            </CardContent>
+                        </Card>
+                        
                     </Box>
                 </Box>
                 {/* Sidebar */}
@@ -342,23 +361,27 @@ function PageDetail(props) {
                     backgroundColor: '#ffffff',
                     p: 1,
                     borderLeft:1,
+                  
+                
                  
                 }}>                  
                    
                     <Box fullWidth sx={{
                         backgroundColor: '#ffffff',
-                   
+                        position:"sticky",
+                        top:100,
                     }}>
-                        <Typography variant="h5" sx={{fontWeight: 'bold', pb: 1}}>位置與週邊</Typography>
+                         <Cardput landlord={landlordValue} />
+                        <Typography variant="h5" sx={{fontWeight: 'bold', pb: 1}}>位置與週邊:</Typography>
                         <Box sx={{ p: 1 }}>
-                            <Link color="inherit" href={searchMap} target="_blank">{addressValue}</Link>
+                            <Link color="inherit" href={searchMap} target="_blank">地址:{addressValue}</Link>
                             <Box sx={{ pt: 1 }}>
                                 <iframe width="600" height="320" id="gmap_canvas" src={addressMap} frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>
                             </Box>
                         </Box>
                     </Box>
-                    <hr/>
-                    <EquipmentAndServices equipmentAndServicesValue={equipmentAndServicesValue} />
+                    {/* <hr/> */}
+                    {/* <EquipmentAndServices equipmentAndServicesValue={equipmentAndServicesValue} /> */}
                     {/* <Cardput landlord={landlordValue} /> */}
                     {/* 位置與週邊 */}
                 </Box>
