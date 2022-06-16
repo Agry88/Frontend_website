@@ -32,10 +32,12 @@ import Button from '@mui/material/Button'
 
 
 
-function AddRentPages() {
+function AddRentPages(props) {
+    const { cityData } = props;
     //存放資料
     const [FloorStatus, setFloorStatus] = useState(false); //出租樓層
     const [AddressCity, setAddressCity] = useState(""); //地址縣市
+    const [AddressArea, setAddressArea] = useState(""); //地址縣市
     const [Address, setAddress] = useState("") //地址
     const [HouseType, setHouseType] = useState(""); //房屋類型
     const [RoomType, setRoomType] = useState(""); //房間類型
@@ -93,7 +95,7 @@ function AddRentPages() {
         { id: 7, RentMoneyItem: "瓦斯費", Status: false },
     ]);
 
-    const CountryArray = ["臺北市", "新北市", "桃園市", "臺中市", "臺南市", "高雄市", "新竹縣", "苗栗縣", "彰化縣", "南投縣", "雲林縣", "嘉義縣", "屏東縣", "宜蘭縣", "花蓮縣", "臺東縣", "澎湖縣", "金門縣", "連江縣"];
+    const CountryArray = Object.keys(cityData);
 
     const handleRoomType = e => { //偵測是否為整層住家以確定是否顯示出租樓層
         setRoomType(e.target.value);
@@ -198,6 +200,22 @@ function AddRentPages() {
                             <MenuItem value={""} disabled>縣市:</MenuItem>
                             {CountryArray.map((Country, index) => {
                                 return <MenuItem key={index} value={Country}>{Country}</MenuItem>
+                            })}
+                        </Select>
+                    </FormControl>
+                    <FormControl>
+                        <InputLabel>鄉鎮市區</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={AddressArea}
+                            defaultValue=""
+                            sx={{ width: 100 }}
+                            onChange={e => setAddressArea(e.target.value)}
+                        >
+                            <MenuItem value={""} disabled>鄉鎮市區</MenuItem>
+                            {cityData[AddressCity] && cityData[AddressCity].map((area, index) => {
+                                return <MenuItem key={index} value={area['AreaName']}>{area['AreaName']}</MenuItem>
                             })}
                         </Select>
                     </FormControl>

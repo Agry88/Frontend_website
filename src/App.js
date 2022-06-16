@@ -10,6 +10,10 @@ import SignUp from "./component/SignUp/signup";
 import SignIn from "./component/SignIn/signin";
 import Footer from './component/Footer/Footer';
 import AddRentPages from './component/AddRentPages/AddRentPages';
+
+import cityCountyData from './data/CityCountyData.json';
+const cityData = Object.fromEntries(cityCountyData.map((city) => [city.CityName, city.AreaList]))
+
 function App() {
   return (
     <HashRouter>
@@ -33,7 +37,9 @@ function App() {
           <Switch>
             <Route exact path='/' component={IndexPage} />
             <Route exact path='/RentPages' component={RentPages} />
-            <Route exact path='/AddRentPages' component={AddRentPages} />
+            <Route exact path='/AddRentPages' >
+              <AddRentPages cityData={cityData} />
+            </Route>
             <Route exact path='/PageDetail/:id' component={PageDetail} />
             <Route exact path='/Test/SelectBar' component={SelectBar} />
             <Route exact path="/SignUp" component={SignUp} />
