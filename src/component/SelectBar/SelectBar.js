@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Radio from '@mui/material/Radio';
 import Checkbox from '@mui/material/Checkbox';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -9,7 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { FormGroup } from '@mui/material';
 
-import { Box } from '@mui/material';
+import { Box, Grid, Tabs, Tab, Typography, TextField } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 
@@ -27,10 +27,11 @@ const areas = {
     '離島': ['澎湖縣', '金門縣', '連江縣']
 }
 
-function ControlledRadioButtonsGroup() {
+function Options() {
     const [value, setValue] = useState('北部');
-    const [county, setCounty] = useState();
+    const [county, setCounty] = useState('臺北市');
     const [areaList, setAreaList] = useState({});
+    const [all, setAll] = useState(false);
 
     const handleChange = (event) => {
         setValue(event.target.value);
@@ -39,17 +40,22 @@ function ControlledRadioButtonsGroup() {
     
     const handleChangeCounty = (event) => {
         setCounty(event.target.value);
+        setAll(false);
     };
     const handleChangeArea = (event) => {
-        console.log(areaList);
-        setAreaList({...areaList, [event.target.name]: event.target.checked});
+        if (event.target.name === '不限') {
+            setAll(event.target.checked);
+            setAreaList(Object.assign({...areaList}, Object.fromEntries(cityData[county].map((area) => { return [area['AreaName'], event.target.checked]}))));
+        } else {
+            setAreaList({...areaList, [event.target.name]: event.target.checked});
+        }
     };
-    return (
-        <>
-            <FormControl sx={{
-                display: 'flex',
-                alignItems: 'center'
-            }}>
+
+
+    // 選擇北、中、南部
+    const PositionOptions = () => {
+        return (
+            <FormControl>
                 <FormLabel id="demo-controlled-radio-buttons-group">地區</FormLabel>
                 <RadioGroup
                     aria-labelledby="demo-controlled-radio-buttons-group"
@@ -57,49 +63,173 @@ function ControlledRadioButtonsGroup() {
                     value={value}
                     onChange={handleChange}
                     row
+                    sx={{ pl: 2 }}
                 >
-                    <FormControlLabel value="北部" control={<Radio />} label="北部" />
-                    <FormControlLabel value="中部" control={<Radio />} label="中部" />
-                    <FormControlLabel value="南部" control={<Radio />} label="南部" />
-                    <FormControlLabel value="東部" control={<Radio />} label="東部" />
-                    <FormControlLabel value="離島" control={<Radio />} label="離島" />
+                    <FormControlLabel sx={{'& .MuiFormControlLabel-label': { fontSize: '0.8rem' }, '& .MuiSvgIcon-root': { fontSize: '0.8rem' }}} value="北部" control={<Radio />} label="北部" />
+                    <FormControlLabel sx={{'& .MuiFormControlLabel-label': { fontSize: '0.8rem' }, '& .MuiSvgIcon-root': { fontSize: '0.8rem' }}} value="中部" control={<Radio />} label="中部" />
+                    <FormControlLabel sx={{'& .MuiFormControlLabel-label': { fontSize: '0.8rem' }, '& .MuiSvgIcon-root': { fontSize: '0.8rem' }}} value="南部" control={<Radio />} label="南部" />
+                    <FormControlLabel sx={{'& .MuiFormControlLabel-label': { fontSize: '0.8rem' }, '& .MuiSvgIcon-root': { fontSize: '0.8rem' }}} value="東部" control={<Radio />} label="東部" />
+                    <FormControlLabel sx={{'& .MuiFormControlLabel-label': { fontSize: '0.8rem' }, '& .MuiSvgIcon-root': { fontSize: '0.8rem' }}} value="離島" control={<Radio />} label="離島" />
                 </RadioGroup>
             </FormControl>
-            <hr />
-            <FormControl sx={{
-                display: 'flex',
-                alignItems: 'center'
-            }}>
+        )
+    }
+    
+    // 選擇縣市
+    const CityOptions = () => {
+        return (
+            <FormControl>
                 <FormLabel id="county-group">縣市</FormLabel>
                 <RadioGroup
-                    aria-labelledby="county-group"
                     name="county-group"
                     value={county}
                     onChange={handleChangeCounty}
                     row
+                    sx={{ pl: 2 }}
                 >
-                    {areas[value].map((county, index) => 
-                        <FormControlLabel value={county} control={<Radio />} label={county} />
+                    {areas[value].map((county) => 
+                        <FormControlLabel sx={{'& .MuiFormControlLabel-label': { fontSize: '0.8rem', color: cityData[county].filter((area) => areaList[area['AreaName']]).length > 0 && 'blue' }, '& .MuiSvgIcon-root': { fontSize: '0.8rem' }}} value={county} control={<Radio/>} label={county} />
                     )}
                 </RadioGroup>
             </FormControl>
-            {county && <>
-            <hr />
-            <FormControl sx={{
-                display: 'flex',
-                alignItems: 'center'
-            }}>
+        )
+    }
+
+    // 選擇鄉鎮市區
+    const AreaOptions = () => {
+        return (
+            <FormControl>
                 <FormLabel id="county-group">鄉鎮市區</FormLabel>
                 <FormGroup
                     row
+                    sx={{ pl: 2 }}
                 >
+                    <FormControlLabel sx={{
+                        '& .MuiFormControlLabel-label': { fontSize: '0.8rem', color: all && 'blue' }}} 
+                        control={<Checkbox sx={{ display: 'none' }} checked={all} onChange={handleChangeArea} name={'不限'} />} label={'不限'}/>
                     {cityData[county].map((area, index) => 
-                        <FormControlLabel control={<Checkbox checked={areaList[area['AreaName']] === undefined ? false : areaList[area['AreaName']]} onChange={handleChangeArea} name={area['AreaName']} />} label={area['AreaName']} />
+                        <FormControlLabel sx={{'& .MuiFormControlLabel-label': { fontSize: '0.8rem', color: areaList[area['AreaName']] && 'blue' }, '& .MuiSvgIcon-root': { fontSize: '0.8rem' }}} control={<Checkbox checked={areaList[area['AreaName']] === undefined ? false : areaList[area['AreaName']]} onChange={handleChangeArea} name={area['AreaName']} />} label={area['AreaName']}/>
                     )}
                 </FormGroup>
             </FormControl>
-            </>}
-        </>
+        )
+    }
+
+    // 地區選擇
+    const LocationOptions = () => {
+        return (
+            <>
+                <PositionOptions />
+                {value && <>
+                    <hr />
+                    <CityOptions />
+                </>}
+                {county && <>
+                    <hr />
+                    <AreaOptions />
+                </>}
+            </>
+        )
+    }
+
+    const [houseType, setHouseType] = useState('不限');
+    const [roomType, setRoomType] = useState('不限');
+    const handleChangeHouseType = (event, newValue) => {
+        setHouseType(newValue)
+    }
+    const handleChangeRoomType = (event, newValue) => {
+        setRoomType(newValue)
+        switch (newValue) {
+            case '整層住家':
+                setRoom({...room, '房間': 1,'衛浴': 1, '廳數': 1});
+                break;
+
+            case '獨立套房':
+                setRoom({...room, '房間': 1,'衛浴': 1, '廳數': 0});
+                break;
+        
+            case '雅房':
+                setRoom({...room, '房間': 1,'衛浴': 0, '廳數': 0});
+                break;
+        
+            default:
+                break;
+        }
+    }
+    const tabProps = (label) => {
+        return {
+            'label': label,
+            'value': label,
+            'sx': { 
+                fontSize: '0.6rem',
+                px: 1,
+                py: 0,
+                minHeight: '1.5rem',
+                minWidth: '2rem',
+                overflow: 'default'
+            }
+        }
+    }
+    const [room, setRoom] = useState({});
+    const handleChangeRoom = (event, name) => {
+        if (event.target.value >= 0) { setRoom({...room, [name]: parseInt(event.target.value)}); }
+        
+    }
+    const ConditionOptions = () => {
+        return (
+            <Grid container columns={16} spacing={2}>
+                <Grid item md={16} sx={{ display: 'flex' }}>
+                    <Typography>房屋類型：</Typography>
+                    <Tabs value={houseType} onChange={handleChangeHouseType} sx={{minHeight: '0' }}>
+                        <Tab {...tabProps('不限')} />
+                        <Tab {...tabProps('公寓大樓')} />
+                        <Tab {...tabProps('透天厝')} />
+                    </Tabs>
+                </Grid>
+                <Grid item md={16} sx={{ display: 'flex' }}>
+                    <Typography>房間類型：</Typography>
+                    <Tabs value={roomType} onChange={handleChangeRoomType} sx={{minHeight: '0' }}>
+                        <Tab {...tabProps('不限')} />
+                        <Tab {...tabProps('整層住家')} />
+                        <Tab {...tabProps('獨立套房')} />
+                        <Tab {...tabProps('雅房')} />
+                    </Tabs>
+                </Grid>
+                <Grid item md={16} sx={{ display: 'flex' }}>
+                    <Typography>房間格局：</Typography>
+                    <Box sx={{ display: 'flex' }}>
+                        <TextField value={room['房間']} onChange={(e) => handleChangeRoom(e, '房間')} size="small" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} InputLabelProps={{ shrink: true }} sx={{width: '4rem' }} />
+                        <Typography>房</Typography>
+                        <TextField value={room['衛浴']} onChange={(e) => handleChangeRoom(e, '衛浴')} size="small" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} InputLabelProps={{ shrink: true }} sx={{width: '4rem' }} />
+                        <Typography>衛</Typography>
+                        <TextField value={room['廳數']} onChange={(e) => handleChangeRoom(e, '廳數')} size="small" type="number" inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} InputLabelProps={{ shrink: true }} sx={{width: '4rem' }} />
+                        <Typography>廳</Typography>
+                    </Box>
+                </Grid>
+                <Grid item md={16} sx={{ display: 'flex' }}>
+                    <Typography>租金：</Typography>
+                </Grid>
+                <Grid item md={16} sx={{ display: 'flex' }}>
+                    <Typography>家具：</Typography>
+                </Grid>
+            </Grid>
+        )
+    }
+    useEffect(() => {
+        console.log(`搜尋以下區域：${ Object.keys(areaList).filter((area) => areaList[area]) }`);
+        console.log(`房屋類型：${houseType}`)
+        console.log(`房間格局：${JSON.stringify(room)}`)
+    }, )
+
+    return (
+        <Grid container columns={16}>
+            <Grid item md={6}>
+                <LocationOptions />
+            </Grid>
+            <Grid item md={6}>
+                <ConditionOptions />
+            </Grid>
+        </Grid>
     );
 }
 
@@ -113,17 +243,15 @@ function SelectBar() {
             display: 'flex',
             alignItems: 'flex-start',
             justifyContent: 'center',
-            pt: '10px'
             
         }}>
             <Paper sx={{
                 p: '10px',
                 display: 'flex',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                width: '100%'
             }}>
-                <Box>
-                    <ControlledRadioButtonsGroup />
-                </Box>
+                <Options />
                 <Button>搜尋</Button>
             </Paper>
             
