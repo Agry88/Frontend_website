@@ -244,15 +244,7 @@ function AddRentPages() {
                 </Stack>
 
                 <Stack direction="row" sx={{ alignItems: "center" }}> {/* 房數 */}
-                    <Typography variant="h6">總房間數:</Typography>
-                    <TextField
-                        id="SquareFeet"
-                        label="總房間數"
-                        sx={{ pl: 1, width: 120 }}
-                        value={Rooms[0].Number}
-                        onChange={e => handleSetRoom(e.target.value, "總房間數")}
-                    />
-                    <Typography variant="h6" sx={{ pl: 2 }}>房間數量:</Typography>
+                    <Typography variant="h6">房間數量:</Typography>
                     <TextField
                         id="SquareFeet"
                         label="房間數量"
