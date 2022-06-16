@@ -40,7 +40,8 @@ const landlordIcon = 'https://icon.url'; //房東icon url
 const landlordStatus = 0; //0為房東, 1為代理人, 2為仲介
 const landlordNickName = '季先生'; //發文者稱呼
 const phoneNumber = '0900111222'; //發文者設定的電話號碼
-const lineAddress = 'https://www.line.com/xxxx/xxx'; //發文者設定的LINE連結
+const Line = 'qwe910108';
+const lineAddress = `http://line.me/ti/p/~${Line}`; //發文者設定的LINE連結
 const address = "南投縣草屯鎮富寮里富春路116巷57號";
 // 菜公村民生路一段426號
 
@@ -233,7 +234,8 @@ function PageDetail(props) {
             </Box>
             <Box sx={{
                 display: 'flex',
-                height:"1200px"
+                height:"1000px",
+       
             }}>
                 <Box sx={{
                     flexGrow: 1,
@@ -326,19 +328,21 @@ function PageDetail(props) {
                 
                     {/* 屋況介紹 */}
                     <Box fullWidth sx={{
-                        backgroundColor: '#e8aaef',
-                
+                       ml:'3px'
+
+                        
                     }}>
                          <Cardput landlord={landlordValue} />
                     </Box>
                 </Box>
                 {/* Sidebar */}
                 <Box sx={{
-                    position: 'sticky',
+
                     width: '50%',
                     backgroundColor: '#ffffff',
                     p: 1,
-                    borderLeft:1
+                    borderLeft:1,
+                 
                 }}>                  
                    
                     <Box fullWidth sx={{

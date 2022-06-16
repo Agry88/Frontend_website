@@ -5,6 +5,8 @@
 }
 
 .carousel .slide img {
-    min-height: 600px;  /* change this to whatever you want */
-    width: auto;
+    height:600px;  /* change this to whatever you want */
+    width:1200px;
+    object-fit: cover;
+ 
 }
