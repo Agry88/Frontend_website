@@ -78,15 +78,6 @@ function AddRentPages() {
         { id: 1, PublicFacility: "游泳池", Status: false },
         { id: 2, PublicFacility: "視聽室", Status: false },
     ]);
-    const [QualityArray, setQualityArray] = useState([ //生活機能
-        { id: 1, Quality: "近便利商店", Status: false },
-        { id: 2, Quality: "近傳統市場", Status: false },
-        { id: 3, Quality: "近百貨公司", Status: false },
-        { id: 4, Quality: "近公園綠地", Status: false },
-        { id: 5, Quality: "近學校", Status: false },
-        { id: 6, Quality: "近醫療機構", Status: false },
-        { id: 7, Quality: "近夜市", Status: false },
-    ]);
     const [IdentifyRequirment, setIdentifyRequirment] = useState([ //身分要求 租住條件
         { id: 1, Identify: "學生", Status: false },
         { id: 2, Identify: "上班族", Status: false },
@@ -368,6 +359,7 @@ function AddRentPages() {
                         label="最短租期包含"
                         value={ShortestRentTime}
                         onChange={e => setShortestRentTime(e.target.value)}
+                        sx={{width:"12%"}}
                     />
                     年
                 </Stack>
@@ -429,26 +421,6 @@ function AddRentPages() {
                     <Button variant="contained" color="primary" sx={{ ml: 3 }} onClick={() => setAbletoGetInDate(defaultDateValue)}>
                         可隨時遷入
                     </Button>
-                </Stack>
-
-                <Stack direction="row" sx={{ alignItems: "center" }}> {/* 生活機能 */}
-                    <Typography variant="h6">生活機能:</Typography>
-                    {QualityArray.map((Item) => {
-                        return (
-                            <FormControlLabel
-                                key={Item.id}
-                                label={Item.Quality}
-                                control={
-                                    <Checkbox
-                                        value=""
-                                        checked={Item.Status}
-                                        onChange={() => handleChangeArray(Item.id, setQualityArray, QualityArray)}
-                                        color="primary"
-                                    />
-                                }
-                            />
-                        )
-                    })}
                 </Stack>
 
                 <Stack direction="row" sx={{ alignItems: "center" }}> {/* 提供私人設備 */}
