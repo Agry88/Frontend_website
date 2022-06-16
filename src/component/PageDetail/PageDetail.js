@@ -323,20 +323,7 @@ function PageDetail(props) {
                         <EquipmentAndServices equipmentAndServicesValue={equipmentAndServicesValue} />
                     </Box>
                     <hr /> */}
-                    {/* 位置與週邊 */}
-                    <Box fullWidth sx={{
-                        backgroundColor: '#ffffff',
-                   
-                    }}>
-                        <Typography variant="h5" sx={{fontWeight: 'bold', pb: 1}}>位置與週邊</Typography>
-                        <Box sx={{ p: 1 }}>
-                            <Link color="inherit" href={searchMap} target="_blank">{addressValue}</Link>
-                            <Box sx={{ pt: 1 }}>
-                                <iframe width="550" height="400" id="gmap_canvas" src={addressMap} frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>
-                            </Box>
-                        </Box>
-                    </Box>
-                    <hr />
+                
                     {/* 屋況介紹 */}
                     <Box fullWidth sx={{
                         backgroundColor: '#e8aaef',
@@ -355,6 +342,20 @@ function PageDetail(props) {
                 }}>                  
                     <EquipmentAndServices equipmentAndServicesValue={equipmentAndServicesValue} />
                     {/* <Cardput landlord={landlordValue} /> */}
+                    {/* 位置與週邊 */}
+                    <hr/>
+                    <Box fullWidth sx={{
+                        backgroundColor: '#ffffff',
+                   
+                    }}>
+                        <Typography variant="h5" sx={{fontWeight: 'bold', pb: 1}}>位置與週邊</Typography>
+                        <Box sx={{ p: 1 }}>
+                            <Link color="inherit" href={searchMap} target="_blank">{addressValue}</Link>
+                            <Box sx={{ pt: 1 }}>
+                                <iframe width="550" height="400" id="gmap_canvas" src={addressMap} frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>
+                            </Box>
+                        </Box>
+                    </Box>
                 </Box>
             </Box>
         </Box>
