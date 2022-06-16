@@ -1,7 +1,8 @@
+import Box from "@mui/material/Box";
 
 function MemberDetail() {
     return ( 
-        <div>MemberDetail</div>
+        <Box>MemberDetail</Box>
      );
 }
 
