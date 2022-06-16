@@ -340,10 +340,7 @@ function PageDetail(props) {
                     p: 1,
                     borderLeft:1
                 }}>                  
-                    <EquipmentAndServices equipmentAndServicesValue={equipmentAndServicesValue} />
-                    {/* <Cardput landlord={landlordValue} /> */}
-                    {/* 位置與週邊 */}
-                    <hr/>
+                   
                     <Box fullWidth sx={{
                         backgroundColor: '#ffffff',
                    
@@ -352,10 +349,14 @@ function PageDetail(props) {
                         <Box sx={{ p: 1 }}>
                             <Link color="inherit" href={searchMap} target="_blank">{addressValue}</Link>
                             <Box sx={{ pt: 1 }}>
-                                <iframe width="550" height="400" id="gmap_canvas" src={addressMap} frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>
+                                <iframe width="600" height="320" id="gmap_canvas" src={addressMap} frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>
                             </Box>
                         </Box>
                     </Box>
+                    <hr/>
+                    <EquipmentAndServices equipmentAndServicesValue={equipmentAndServicesValue} />
+                    {/* <Cardput landlord={landlordValue} /> */}
+                    {/* 位置與週邊 */}
                 </Box>
             </Box>
         </Box>
