@@ -27,10 +27,10 @@ export default function Cardput(props) {
     
     return (
         <Box sx={{
-            backgroundColor: '#ffffff',
-
+            backgroundColor: '#ffffff'
+         
         }}>
-            <Card sx={{maxWidth:566}}>
+            <Card sx={{maxWidth:600,minHeight:100}}>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         <Grid container spacing={0}>
@@ -44,7 +44,7 @@ export default function Cardput(props) {
                             <Grid item sx={{mt:3,fontSize:20}}>
                                 {landlordType}：{landlordNickName}
                             </Grid>
-                            <Grid item  sx={{mt:2,ml:10,fontSize:20}}>
+                            <Grid item  sx={{mt:2,ml:15,fontSize:20}}>
                                 <Tooltip title={<QRCodeSVG value={displayPhoneNumber}/>}>
                                     <Button size="medium" sx={{color:'white',borderRadius: 1,bgcolor:'#ff8000',':hover': {
                                         bgcolor: '#ff8000', // theme.palette.primary.main
@@ -52,8 +52,8 @@ export default function Cardput(props) {
                                         }}} ><PhoneIcon/>{displayPhoneNumber}</Button>
                                 </Tooltip>
                             </Grid>
-                            <Grid item  sx={{mt:2,ml:3,fontSize:10 , minWidth:120}}>
-                                <Tooltip title={<QRCodeSVG value="http://line.me/ti/p/~qwe910108"/>}>
+                            <Grid item  sx={{mt:2,ml:3,fontSize:20, minWidth:120}}>
+                                <Tooltip title={<QRCodeSVG value={ lineAddress}/>}>
                                     <Button size="medium" fullWidth sx={{color:'white',borderRadius: 1,bgcolor:'#23ba4f',':hover': {
                                         bgcolor: '#23ba4f', // theme.palette.primary.main
                                         color: 'white',
@@ -63,12 +63,8 @@ export default function Cardput(props) {
                             
                         </Grid>     
                     </Typography>
-                    <Typography variant="body2" gutterBottom>
-                        body2. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-                        blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur,
-                        neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum
-                        quasi quidem quibusdam.
-                    </Typography>
+              
+                  
                 </CardContent>
             </Card>
         </Box>

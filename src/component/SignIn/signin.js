@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from 'react-router-dom'
+import { Link , useHistory } from 'react-router-dom'
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,6 +13,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import SendIcon from "@mui/icons-material/Send";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useDispatch } from "react-redux";
+import { SetMember } from "../../Actions";
 
 function Copyright(props) {
   return (
@@ -34,7 +36,11 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+
+
 export default function SignIn() {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -42,7 +48,11 @@ export default function SignIn() {
       email: data.get("email"),
       password: data.get("password"),
     });
+    // SetStoreMember
+    dispatch(SetMember(data.get("email")));
+    history.push("./");
   };
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -98,10 +108,6 @@ export default function SignIn() {
               variant="outlined"
               endIcon={<SendIcon />}
               sx={{ mt: 3, mb: 2 }}
-              onClick={(e) => {
-                e.preventDefault();
-                window.location.href = "/Indexpages1";
-              }}
             >
               SIGN IN
             </Button>
