@@ -35,7 +35,9 @@ function App() {
             // backgroundColor: '#fcba03',
           }}>
           <Switch>
-            <Route exact path='/' component={IndexPage} />
+            <Route exact path='/'>
+              <IndexPage cityData={cityData} />
+            </Route>
             <Route exact path='/RentPages' component={RentPages} />
             <Route exact path='/AddRentPages' >
               <AddRentPages cityData={cityData} />
