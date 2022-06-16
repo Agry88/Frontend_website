@@ -41,7 +41,6 @@ function App() {
               <AddRentPages cityData={cityData} />
             </Route>
             <Route exact path='/PageDetail/:id' component={PageDetail} />
-            <Route exact path='/Test/SelectBar' component={SelectBar} />
             <Route exact path="/SignUp" component={SignUp} />
             <Route exact path="/SignIn" component={SignIn} />
             <Route path='*'>Not Found. ERROR: 404</Route>
