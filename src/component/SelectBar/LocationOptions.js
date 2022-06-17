@@ -110,23 +110,24 @@ function LocationOptions(props) {
                     </RadioGroup>
                 </FormControl>
             </>}
-            {county && <> {/* 選擇鄉鎮市區 */}
                 <hr />
                 <FormControl> 
                     <FormLabel id="county-group">鄉鎮市區</FormLabel>
+                    {county && <> {/* 選擇鄉鎮市區 */}
                     <FormGroup
                         row
                         sx={{ pl: 2 }}
                     >
                         <FormControlLabel sx={{
-                            '& .MuiFormControlLabel-label': { fontSize: '0.8rem', color: all && 'blue' }}} 
-                            control={<Checkbox sx={{ display: 'none' }} checked={all} onChange={handleChangeArea} name={'不限'} />} label={'不限'}/>
+                            '& .MuiFormControlLabel-label': { fontSize: '0.8rem', color: all && 'blue' },
+                            '& .MuiSvgIcon-root': { fontSize: '0.8rem' }}}
+                            control={<Checkbox checked={all} onChange={handleChangeArea} name={'不限'} />} label={'不限　'}/>
                         {cityData[county].map((area, index) => 
                             <FormControlLabel sx={{'& .MuiFormControlLabel-label': { fontSize: '0.8rem', color: isChecked(area['AreaName']) && 'blue' }, '& .MuiSvgIcon-root': { fontSize: '0.8rem' }}} control={<Checkbox county={county} checked={ isChecked(area['AreaName']) } onChange={handleChangeArea} name={area['AreaName']} />} label={area['AreaName']}/>
                         )}
                     </FormGroup>
+                    </>}
                 </FormControl>
-            </>}
         </>
     )
 }

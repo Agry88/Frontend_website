@@ -4,6 +4,17 @@ const initialState = {
     room: {'房間': 0, '衛浴': 0, '廳數': 0}, // 房屋格局 Ex. {'房間': 2, '衛浴': 1, '廳數': 0}
     rent: [3000, 6000], // 租金範圍 [下限值, 上限值]
     areaList: {}, // 搜尋區域 Ex. {'臺北市': ['大安區', '中正區'], '基隆市': '中正區'}
+    equipmentAndServices: {
+        condition: {
+            role: null,
+            gender: null
+        },
+        houseRule: {
+            pets: null,
+            fire: null
+        },
+        equipment: []
+    }
 }
 
 const Search = (state = initialState, { type, payload }) => {
@@ -22,6 +33,22 @@ const Search = (state = initialState, { type, payload }) => {
             
         case "setRent":
             return { ...state, rent: payload.data }
+
+        case "setGender":
+            var { equipmentAndServices } = state;
+            var { condition } = equipmentAndServices;
+
+            var newCondition = {...condition, gender: payload.data};
+            var newEquipmentAndServices = {...equipmentAndServices, condition: newCondition};
+            return { ...state, equipmentAndServices: newEquipmentAndServices }
+
+        case "setRoles":
+            var { equipmentAndServices } = state;
+            var { condition } = equipmentAndServices;
+
+            var newCondition = {...condition, role: payload.data};
+            var newEquipmentAndServices = {...equipmentAndServices, condition: newCondition};
+            return { ...state, equipmentAndServices: newEquipmentAndServices }
 
         default:
             return state
