@@ -42,18 +42,25 @@ function LocationOptions(props) {
         const name = event.target.name;
         if (name === '不限') {
             setAll(checked);
-            // setAreaList(Object.assign({...SearchData.areaList}, Object.fromEntries(cityData[county].map((area) => { return [area['AreaName'], checked]}))));
-            dispatch(SetSearch('setAreaList', Object.assign({...SearchData.areaList}, Object.fromEntries(cityData[county].map((area) => { return [area['AreaName'], checked]})))));
+            const countyList = new Set(SearchData.areaList[county]);
+            
+            if (!checked) {
+                cityData[county].map((area) =>  countyList.delete(area['AreaName']) );
+            } else {
+                cityData[county].map((area) =>  countyList.add(area['AreaName']) );
+            }
+            dispatch(SetSearch('setAreaList', {...SearchData.areaList, [county]: Array.from(countyList)}));
+            // dispatch(SetSearch('setAreaList', Object.assign({...SearchData.areaList}, Object.fromEntries(cityData[county].map((area) => { return [area['AreaName'], checked]})))));
         } else {
             // setAreaList({...SearchData.areaList, [name]: checked});
             const countyList = new Set(SearchData.areaList[county]);
             if (!checked) {
                 countyList.delete(name);
-                dispatch(SetSearch('setAreaList', {...SearchData.areaList, [county]: Array.from(countyList)}));
+                setAll(false);
             } else {
                 countyList.add(name);
-                dispatch(SetSearch('setAreaList', {...SearchData.areaList, [county]: Array.from(countyList)}));
             }
+            dispatch(SetSearch('setAreaList', {...SearchData.areaList, [county]: Array.from(countyList)}));
         }
     };
     function isChecked(area) {
