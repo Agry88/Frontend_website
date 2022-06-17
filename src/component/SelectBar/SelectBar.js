@@ -41,7 +41,7 @@ function SelectBar(props) {
                 width: '100%'
             }}>
                 <Grid container columns={16}>
-                    <Grid item md={6}>
+                    <Grid item md={8}>
                         <LocationOptions cityData={cityData} />
                     </Grid>
                     <Grid item md={8}>

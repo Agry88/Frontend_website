@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Radio from '@mui/material/Radio';
 import Checkbox from '@mui/material/Checkbox';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -24,44 +24,48 @@ function LocationOptions(props) {
     const dispatch = useDispatch();
     const { cityData } = props;
     const [position, setPosition] = useState('北部');
-    const [county, setCounty] = useState('臺北市');
+    const [county, setCounty] = useState(null);
     const [all, setAll] = useState(false);
 
     const handleChangePositions = (event) => {
-        setPosition(event.target.value);
-        setCounty();
+        const newPosition = event.target.value;
+        setPosition(newPosition);
+        setCounty(null);
     };
     
     const handleChangeCounty = (event) => {
-        setCounty(event.target.value);
-        setAll(false);
+        const newCounty = event.target.value;
+        setCounty(newCounty);
     };
+    
+    useEffect(() => {
+        if (SearchData.areaList[county] !== undefined) {
+            const countyList = new Set(SearchData.areaList[county]);
+            setAll(cityData[county].length === countyList.size);
+        }
+    }, [county]);
 
     const handleChangeArea = (event) => {
         const checked = event.target.checked;
         const name = event.target.name;
+        const countyList = new Set(SearchData.areaList[county]);
         if (name === '不限') {
-            setAll(checked);
-            const countyList = new Set(SearchData.areaList[county]);
-            
             if (!checked) {
                 cityData[county].map((area) =>  countyList.delete(area['AreaName']) );
             } else {
                 cityData[county].map((area) =>  countyList.add(area['AreaName']) );
             }
-            dispatch(SetSearch('setAreaList', {...SearchData.areaList, [county]: Array.from(countyList)}));
-            // dispatch(SetSearch('setAreaList', Object.assign({...SearchData.areaList}, Object.fromEntries(cityData[county].map((area) => { return [area['AreaName'], checked]})))));
+            setAll(checked);
+
         } else {
-            // setAreaList({...SearchData.areaList, [name]: checked});
-            const countyList = new Set(SearchData.areaList[county]);
             if (!checked) {
                 countyList.delete(name);
-                setAll(false);
             } else {
                 countyList.add(name);
             }
-            dispatch(SetSearch('setAreaList', {...SearchData.areaList, [county]: Array.from(countyList)}));
+            setAll(cityData[county].length === countyList.size);
         }
+        dispatch(SetSearch('setAreaList', {...SearchData.areaList, [county]: Array.from(countyList)}));
     };
     function isChecked(area) {
         return new Set(SearchData.areaList[county]).has(area);
