@@ -36,14 +36,15 @@ function App() {
             // backgroundColor: '#fcba03',
           }}>
           <Switch>
-            <Route exact path='/' component={IndexPage} />
+            <Route exact path='/'>
+              <IndexPage cityData={cityData} />
+            </Route>
             <Route exact path='/RentPages' component={RentPages} />
             <Route exact path='/AddRentPages' >
               <AddRentPages cityData={cityData} />
             </Route>
             <Route exact path='/MemberDetail' component={MemberDetail} />
             <Route exact path='/PageDetail/:id' component={PageDetail} />
-            <Route exact path='/Test/SelectBar' component={SelectBar} />
             <Route exact path="/SignUp" component={SignUp} />
             <Route exact path="/SignIn" component={SignIn} />
             <Route path='*'>Not Found. ERROR: 404</Route>

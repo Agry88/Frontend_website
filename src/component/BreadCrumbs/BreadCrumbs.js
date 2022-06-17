@@ -22,13 +22,7 @@ function BreadCrumbs(props) {
                 <Link underline="hover" color="inherit" to="/">
                     <HomeIcon />
                 </Link>
-                <Link
-                    underline="hover"
-                    color="inherit"
-                    onClick={goBack}
-                >
-                    Core
-                </Link>
+                
                 <Typography color="text.primary">Breadcrumbs</Typography>
             </Breadcrumbs>
         </Box>

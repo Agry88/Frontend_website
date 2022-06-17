@@ -5,7 +5,7 @@ import SelectBar from '../SelectBar/SelectBar.js';
 import BreadCrumbs from '../BreadCrumbs/BreadCrumbs';
 
 function IndexPage(props) {
-
+    const { cityData } = props;
     const [DataList, setDataList] = useState([]);
     const [Page, setPage] = useState("");
 
@@ -36,7 +36,7 @@ function IndexPage(props) {
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: 800, }}>
 
             <Box>
-                <SelectBar />
+                <SelectBar cityData={cityData} />
             </Box>
 
             {/* ??? */}

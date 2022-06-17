@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Box,Card,CardContent,Typography,Avatar,Grid,Button,Tooltip} from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
 import Line from'./icons8-line.svg';
@@ -30,9 +30,9 @@ export default function Cardput(props) {
             backgroundColor: '#ffffff'
          
         }}>
-            <Card sx={{maxWidth:600,minHeight:100}}>
+            <Card sx={{maxWidth:"610px",minHeight:100,boxShadow: 3}}>
                 <CardContent>
-                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    <Typography sx={{ fontSize: 14 }} color="text.secondary" component={'div'} gutterBottom>
                         <Grid container spacing={0}>
                             <Grid item>
                                 <Avatar 
@@ -44,7 +44,7 @@ export default function Cardput(props) {
                             <Grid item sx={{mt:3,fontSize:20}}>
                                 {landlordType}：{landlordNickName}
                             </Grid>
-                            <Grid item  sx={{mt:2,ml:15,fontSize:20}}>
+                            <Grid item  sx={{mt:2,ml:10,fontSize:20}}>
                                 <Tooltip title={<QRCodeSVG value={displayPhoneNumber}/>}>
                                     <Button size="medium" sx={{color:'white',borderRadius: 1,bgcolor:'#ff8000',':hover': {
                                         bgcolor: '#ff8000', // theme.palette.primary.main
@@ -63,8 +63,6 @@ export default function Cardput(props) {
                             
                         </Grid>     
                     </Typography>
-              
-                  
                 </CardContent>
             </Card>
         </Box>
