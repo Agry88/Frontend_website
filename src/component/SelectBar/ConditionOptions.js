@@ -1,6 +1,5 @@
 
 import * as React from 'react';
-import { useState, useEffect } from 'react';
 
 import { Box, Grid, Tabs, Tab, Typography, TextField, Slider } from '@mui/material';
 

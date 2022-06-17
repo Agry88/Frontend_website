@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Radio from '@mui/material/Radio';
 import Checkbox from '@mui/material/Checkbox';
 import RadioGroup from '@mui/material/RadioGroup';
