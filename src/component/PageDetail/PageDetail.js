@@ -4,14 +4,14 @@ import BreadCrumbs from "../BreadCrumbs/BreadCrumbs";
 import './PageDetail.css';
 import '../../img/male-gender.png';
 import '../../img/female.png';
-import Carousels from "./image"; // 幻燈片
+import Carousels from "./image"; 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import Cardput from "./Cardput"; // 側邊欄
-import Outline from "./Outline";//標籤
-import CardDetail from "./CardDetail";//屋主說
-import HouseDetail from "./houseDetail";//房屋詳情
+import Cardput from "./Cardput"; 
+import Outline from "./Outline";
+import CardDetail from "./CardDetail";
+import HouseDetail from "./houseDetail";
 
-import EquipmentAndServices from "./EquipmentAndServices";//list
+import EquipmentAndServices from "./EquipmentAndServices";
 
 
 // 後端傳入資料
