@@ -5,31 +5,13 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="about">
-        Period-end Report
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const theme = createTheme();
 
@@ -59,7 +41,7 @@ export default function SignUp() {
             <GroupAddIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            註冊
           </Typography>
           <Box
             component="form"
@@ -75,7 +57,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="firstName"
-                  label="First Name"
+                  label="名"
                   autoFocus
                 />
               </Grid>
@@ -84,19 +66,39 @@ export default function SignUp() {
                   required
                   fullWidth
                   id="lastName"
-                  label="Last Name"
+                  label="姓"
                   name="lastName"
                   autoComplete="family-name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="NickName"
+                  label="暱稱"
+                  name="NickName"
+                  autoComplete="NickName"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="Line"
+                  label="Line ID"
+                  name="Line"
+                  autoComplete="Line"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  id="Phone"
+                  label="電話號碼"
+                  name="Phone"
+                  autoComplete="Phone"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -104,7 +106,7 @@ export default function SignUp() {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label="密碼"
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -115,7 +117,7 @@ export default function SignUp() {
                   control={
                     <Checkbox value="allowExtraEmails" color="primary" />
                   }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  label="我願意收到最新通知的Email"
                 />
               </Grid>
             </Grid>
@@ -126,21 +128,20 @@ export default function SignUp() {
               sx={{ mt: 3, mb: 2 }}
               onClick={(e) => {
                 e.preventDefault();
-                window.location.href = "/Indexpages1";
+                window.location.href = "/";
               }}
             >
-              SIGN UP
+              註冊
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to="/" variant="body2">
-                  Already have an account? Sign in
+                  已經有帳號了嗎? 來登入吧
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );
