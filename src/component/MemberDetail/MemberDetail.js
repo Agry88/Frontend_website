@@ -4,14 +4,15 @@ import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import IconButton from '@mui/material/IconButton'
 import FormControl from '@mui/material/FormControl'
-import FormLabel from '@mui/material/FormLabel'
+import Divider from '@mui/material/Divider'
+
 import FormGroup from '@mui/material/FormGroup'
-import FormHelperText from '@mui/material/FormHelperText'
+
 import TextField from '@mui/material/TextField'
 import Modal from '@mui/material/Modal'
 import Typography from "@mui/material/Typography";
 
-import { useHistory, Link } from "react-router-dom";
+import { useHistory} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { SetMember } from "../../Actions";
 import { useState } from "react";
@@ -67,12 +68,13 @@ function MemberDetail() {
     }
 
     return (
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box sx={{ display: "flex", justifyContent: "center",position:"sticky",top:150 }}>
             <Box sx={{ flexDirection: "column", mt: 5, p: 5, border: 1, borderRadius: 5, borderColor: "#589dfc", boxShadow: 5 }}>
-                <Stack sx={{ display: "flex", justifyContent: "center" }} direction={"row"}> {/* 切成左右邊 左邊顯示可更改內容 右邊顯示頭像 */}
-                    <Box sx={{ width: "40rem" }}> {/* 左邊區塊 顯示可更改內容 */}
+                <Stack sx={{ display: "flex", justifyContent: "center" }} direction={"row"} spacing={0.1}> {/* 切成左右邊 左邊顯示可更改內容 右邊顯示頭像 */}
+                    <Box sx={{ width: "35rem" }}> {/* 左邊區塊 顯示可更改內容 */}
                         <FormControl component="form" onSubmit={handleSubmit}>
                             <Typography variant="h2" color="initial" sx={{ textAlign: "center", mb: 2 }}>修改會員資訊</Typography>
+                            <Divider sx={{ m: 1 }} />
                             <FormGroup>
                                 <Stack direction={"column"} spacing={2}>
                                     <Stack direction={"row"} spacing={2}>
@@ -118,7 +120,7 @@ function MemberDetail() {
                     </Box>
 
 
-                    <Stack sx={{display:"flex"}} > {/* 右邊區塊 顯示頭像 */}
+                    <Stack sx={{display:"flex" , justifyContent: "center" }} > {/* 右邊區塊 顯示頭像 */}
                         <input id="fileButton" type="file" hidden onChange={handlefile} />
                         <Box >
                             <IconButton onClick={TriggerFile}> {/* 點擊時觸發上面的input File */}
@@ -126,16 +128,16 @@ function MemberDetail() {
                             </IconButton>
                             <Typography variant="h5" color="initial" sx={{ textAlign: "center" }}>點擊頭像更改頭像</Typography>
                         </Box>
-                        <Stack direction={"row"} sx={{ pt:"8.5rem" }}> {/* 下方登出列 */}
+                        <Stack direction={"row"} sx={{ pt:"2rem" }}> {/* 下方登出列 */}
                             <Button sx={{ mr: 2 }} variant="outlined" onClick={() => setModalStatus(true)}>更改密碼</Button>
                             <Button sx={{ mr: 2 }} variant="contained" color="warning" onClick={handleLogout}>登出</Button>
                         </Stack>
                     </Stack>
                 </Stack>
+            </Box >
+            {/* ==Modal== */}
 
-                {/* ==Modal== */}
-
-                <Modal
+            <Modal
                     open={ModalStatus}
                     onClose={() => setModalStatus(false)}
                     aria-labelledby="modal-modal-title"
@@ -147,7 +149,6 @@ function MemberDetail() {
                 </Modal>
 
                 {/* ==Modal== */}
-            </Box >
         </Box>
 
     );
