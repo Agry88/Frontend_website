@@ -1,0 +1,45 @@
+
+
+// const genderIcon = "https://cdn-icons-png.flaticon.com/512/2324/2324529.png"
+// const femaleIcon = "https://cdn-icons.flaticon.com/png/512/2404/premium/2404482.png?token=exp=1654281081~hmac=36025a89fc6972b4787d2a5f7c5270e7"
+// const maleIcon = "https://cdn-icons.flaticon.com/png/512/2404/premium/2404544.png?token=exp=1654283047~hmac=e71d15d345eada548116d8a3cec15522"
+// const LGBTIcon = "https://cdn-icons-png.flaticon.com/512/2620/2620884.png"
+// const studentIcon = "https://cdn-icons-png.flaticon.com/512/1157/1157034.png"
+// const officeWorkerIcon = "https://cdn-icons.flaticon.com/png/512/4483/premium/4483845.png?token=exp=1654282938~hmac=d2aeb5e6bad3e45e29bfca495af41cfc"
+// const familyIcon = "https://cdn-icons-png.flaticon.com/512/646/646344.png"
+// const petIcon = "https://cdn-icons.flaticon.com/png/512/3737/premium/3737726.png?token=exp=1654283205~hmac=8642f2388ad561c75c2050781095b7c9"
+// const bedIcon = "https://cdn-icons.flaticon.com/png/512/1047/premium/1047004.png?token=exp=1654283368~hmac=1c01c9fe09ccf081a9b3048c979589b7"
+// const deskIcon = "https://cdn-icons-png.flaticon.com/512/3233/3233563.png"
+// const chairIcon = "https://cdn-icons.flaticon.com/png/512/1889/premium/1889037.png?token=exp=1654283440~hmac=1e939f00660efdc010fe5f740cbfca7c"
+// const airConditionerIcon = "https://cdn-icons-png.flaticon.com/512/1530/1530481.png"
+// const waterHeaterIcon = "https://cdn-icons.flaticon.com/png/512/2482/premium/2482562.png?token=exp=1654283595~hmac=a7e29a093a56fc6b2ffa1dfdf2b2fedc"
+// const gasStoveIcon = "https://cdn-icons.flaticon.com/png/512/2010/premium/2010740.png?token=exp=1654283802~hmac=4bf482c8103d68299e12c54b684b6c66"
+// const inductionCookerIcon = "https://cdn-icons-png.flaticon.com/512/7284/7284820.png"
+// const washingMachineIcon = "https://cdn-icons.flaticon.com/png/512/3124/premium/3124957.png?token=exp=1654284267~hmac=f49875da0d3577d198869c728b904c62"
+// const refrigeratorIcon = "https://cdn-icons.flaticon.com/png/512/4249/premium/4249396.png?token=exp=1654284535~hmac=d5efd5a129c148b021cc56b32769dab1"
+// const yearIcon = "https://cdn-icons-png.flaticon.com/512/7123/7123715.png";
+// const monthIcon = 'https://cdn-icons-png.flaticon.com/512/7123/7123306.png'
+
+
+// const conditionsIcon = {
+//     '限男性': <Condition text={'限男性'} icon={icons['限男性']}/>,
+//     '限女性': <Condition text={'限女性'} icon={icons['限女性']}/>,
+//     '男女皆可': <Condition text={'男女皆可'} icon={icons['男女皆可']}/>,
+//     male: <Condition text={'限男性'} icon={maleIcon}/>,
+//     female: <Condition text={'限女性'} icon={femaleIcon}/>,
+//     gender: <Condition text={'男女皆可'} icon={genderIcon}/>,
+//     rainbow: <Condition text={'彩虹友善'} icon={LGBTIcon}/>,
+//     student: <Condition text={'學生'} icon={studentIcon}/>,
+//     officeWorker: <Condition text={'上班族'} icon={officeWorkerIcon}/>,
+//     family: <Condition text={'家庭'} icon={familyIcon}/>,
+//     year: <Condition text={'最短租期'} icon={yearIcon}/>,
+//     month: <Condition text={'最短租期'} icon={monthIcon}/>,
+//     '床': <Condition text={'床'} icon={icons['床']}/>,
+//     '雙人床': <Condition text={'雙人床'} icon={icons['雙人床']}/>,
+//     '書桌': <Condition text={'書桌'} icon={icons['書桌']}/>,
+//     '洗衣機': <Condition text={'洗衣機'} icon={icons['洗衣機']}/>,
+//     '電視': <Condition text={'電視'} icon={icons['電視']}/>,
+//     '游泳池': <Condition text={'游泳池'} icon={icons['游泳池']}/>,
+//     '視聽室': <Condition text={'視聽室'} icon={icons['視聽室']}/>,
+//     '車位': <Condition text={'車位'} icon={icons['車位']}/>
+// }
