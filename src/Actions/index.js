@@ -6,3 +6,11 @@ export const SetMember = (username) => {
         }
     }
 }
+export const SetSearch = (type, data) => {
+    return {
+        type: type,
+        payload:{
+            data: data
+        }
+    }
+}

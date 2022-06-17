@@ -8,6 +8,8 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { FormGroup } from '@mui/material';
 
+import { useDispatch, useSelector } from "react-redux";
+import { SetSearch } from "../../Actions";
 
 const areas = {
     '北部': ['臺北市', '新北市', '桃園市', '新竹市', '基隆市', '新竹縣', '宜蘭縣'],
@@ -18,18 +20,51 @@ const areas = {
 }
 
 function LocationOptions(props) {
+    const SearchData = useSelector(state => state.Search);
+    const dispatch = useDispatch();
     const { cityData } = props;
     const [position, setPosition] = useState('北部');
     const [county, setCounty] = useState('臺北市');
-    const [areaList, setAreaList] = useState({});
     const [all, setAll] = useState(false);
 
-    const PositionOptions = () => { // 選擇北、中、南部
-        const handleChangePositions = (event) => {
-            setPosition(event.target.value);
-            setCounty();
-        };
-        return (
+    const handleChangePositions = (event) => {
+        setPosition(event.target.value);
+        setCounty();
+    };
+    
+    const handleChangeCounty = (event) => {
+        setCounty(event.target.value);
+        setAll(false);
+    };
+
+    const handleChangeArea = (event) => {
+        const checked = event.target.checked;
+        const name = event.target.name;
+        if (name === '不限') {
+            setAll(checked);
+            // setAreaList(Object.assign({...SearchData.areaList}, Object.fromEntries(cityData[county].map((area) => { return [area['AreaName'], checked]}))));
+            dispatch(SetSearch('setAreaList', Object.assign({...SearchData.areaList}, Object.fromEntries(cityData[county].map((area) => { return [area['AreaName'], checked]})))));
+        } else {
+            // setAreaList({...SearchData.areaList, [name]: checked});
+            const countyList = new Set(SearchData.areaList[county]);
+            if (!checked) {
+                countyList.delete(name);
+                dispatch(SetSearch('setAreaList', {...SearchData.areaList, [county]: Array.from(countyList)}));
+            } else {
+                countyList.add(name);
+                dispatch(SetSearch('setAreaList', {...SearchData.areaList, [county]: Array.from(countyList)}));
+            }
+        }
+    };
+    function isChecked(area) {
+        return new Set(SearchData.areaList[county]).has(area);
+    }
+    function hasChecked(county) {
+        return (county in SearchData.areaList && SearchData.areaList[county].length > 0);
+    }
+
+    return (
+        <>  {/* 戰南北 */}
             <FormControl>
                 <FormLabel id="demo-controlled-radio-buttons-group">地區</FormLabel>
                 <RadioGroup
@@ -47,73 +82,39 @@ function LocationOptions(props) {
                     <FormControlLabel sx={{'& .MuiFormControlLabel-label': { fontSize: '0.8rem' }, '& .MuiSvgIcon-root': { fontSize: '0.8rem' }}} value="離島" control={<Radio />} label="離島" />
                 </RadioGroup>
             </FormControl>
-        )
-    }
-    
-    const CityOptions = () => {  // 選擇縣市
-        const handleChangeCounty = (event) => {
-            setCounty(event.target.value);
-            setAll(false);
-        };
-        return (
-            <FormControl>
-                <FormLabel id="county-group">縣市</FormLabel>
-                <RadioGroup
-                    name="county-group"
-                    value={county}
-                    onChange={handleChangeCounty}
-                    row
-                    sx={{ pl: 2 }}
-                >
-                    {areas[position].map((county) => 
-                        <FormControlLabel sx={{'& .MuiFormControlLabel-label': { fontSize: '0.8rem', color: cityData[county].filter((area) => areaList[area['AreaName']]).length > 0 && 'blue' }, '& .MuiSvgIcon-root': { fontSize: '0.8rem' }}} value={county} control={<Radio/>} label={county} />
-                    )}
-                </RadioGroup>
-            </FormControl>
-        )
-    }
-
-    const AreaOptions = () => { // 選擇鄉鎮市區
-        const handleChangeArea = (event) => {
-            if (event.target.name === '不限') {
-                setAll(event.target.checked);
-                setAreaList(Object.assign({...areaList}, Object.fromEntries(cityData[county].map((area) => { return [area['AreaName'], event.target.checked]}))));
-            } else {
-                setAreaList({...areaList, [event.target.name]: event.target.checked});
-            }
-        };
-        return (
-            <FormControl>
-                <FormLabel id="county-group">鄉鎮市區</FormLabel>
-                <FormGroup
-                    row
-                    sx={{ pl: 2 }}
-                >
-                    <FormControlLabel sx={{
-                        '& .MuiFormControlLabel-label': { fontSize: '0.8rem', color: all && 'blue' }}} 
-                        control={<Checkbox sx={{ display: 'none' }} checked={all} onChange={handleChangeArea} name={'不限'} />} label={'不限'}/>
-                    {cityData[county].map((area, index) => 
-                        <FormControlLabel sx={{'& .MuiFormControlLabel-label': { fontSize: '0.8rem', color: areaList[area['AreaName']] && 'blue' }, '& .MuiSvgIcon-root': { fontSize: '0.8rem' }}} control={<Checkbox checked={areaList[area['AreaName']] === undefined ? false : areaList[area['AreaName']]} onChange={handleChangeArea} name={area['AreaName']} />} label={area['AreaName']}/>
-                    )}
-                </FormGroup>
-            </FormControl>
-        )
-    }
-
-    useEffect(() => {
-        console.log(`搜尋以下區域：${ Object.keys(areaList).filter((area) => areaList[area]) }`);
-    }, )
-    
-    return (
-        <>
-            <PositionOptions />
-            {position && <>
+            {position && <> {/* 選擇縣市 */}
                 <hr />
-                <CityOptions />
+                <FormControl>
+                    <FormLabel id="county-group">縣市</FormLabel>
+                    <RadioGroup
+                        name="county-group"
+                        value={county}
+                        onChange={handleChangeCounty}
+                        row
+                        sx={{ pl: 2 }}
+                    >
+                        {areas[position].map((county) => 
+                            <FormControlLabel sx={{'& .MuiFormControlLabel-label': { fontSize: '0.8rem', color: hasChecked(county) && 'blue' }, '& .MuiSvgIcon-root': { fontSize: '0.8rem' }}} value={county} control={<Radio/>} label={county} />
+                        )}
+                    </RadioGroup>
+                </FormControl>
             </>}
-            {county && <>
+            {county && <> {/* 選擇鄉鎮市區 */}
                 <hr />
-                <AreaOptions />
+                <FormControl> 
+                    <FormLabel id="county-group">鄉鎮市區</FormLabel>
+                    <FormGroup
+                        row
+                        sx={{ pl: 2 }}
+                    >
+                        <FormControlLabel sx={{
+                            '& .MuiFormControlLabel-label': { fontSize: '0.8rem', color: all && 'blue' }}} 
+                            control={<Checkbox sx={{ display: 'none' }} checked={all} onChange={handleChangeArea} name={'不限'} />} label={'不限'}/>
+                        {cityData[county].map((area, index) => 
+                            <FormControlLabel sx={{'& .MuiFormControlLabel-label': { fontSize: '0.8rem', color: isChecked(area['AreaName']) && 'blue' }, '& .MuiSvgIcon-root': { fontSize: '0.8rem' }}} control={<Checkbox county={county} checked={ isChecked(area['AreaName']) } onChange={handleChangeArea} name={area['AreaName']} />} label={area['AreaName']}/>
+                        )}
+                    </FormGroup>
+                </FormControl>
             </>}
         </>
     )
