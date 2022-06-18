@@ -26,23 +26,23 @@ function ConditionOptions(props) {
         dispatch(SetSearch('setRoomType', newValue));
         switch (newValue) {
             case '整層住家':
-                dispatch(SetSearch('setRoom', {...SearchData.room, '房間': 1,'衛浴': 1, '廳數': 1}));
+                dispatch(SetSearch('setRoom', {...SearchData.houseInfo.room, '房間': 1,'衛浴': 1, '廳數': 1}));
                 break;
 
             case '獨立套房':
-                dispatch(SetSearch('setRoom', {...SearchData.room, '房間': 1,'衛浴': 1, '廳數': 0}));
+                dispatch(SetSearch('setRoom', {...SearchData.houseInfo.room, '房間': 1,'衛浴': 1, '廳數': 0}));
                 break;
         
             case '分租套房':
-                dispatch(SetSearch('setRoom', {...SearchData.room, '房間': 1,'衛浴': 1, '廳數': 1}));
+                dispatch(SetSearch('setRoom', {...SearchData.houseInfo.room, '房間': 1,'衛浴': 1, '廳數': 1}));
                 break;
 
             case '分租雅房':
-                dispatch(SetSearch('setRoom', {...SearchData.room, '房間': 1,'衛浴': 0, '廳數': 1}));
+                dispatch(SetSearch('setRoom', {...SearchData.houseInfo.room, '房間': 1,'衛浴': 0, '廳數': 1}));
                 break;
 
             case '雅房':
-                dispatch(SetSearch('setRoom', {...SearchData.room, '房間': 1,'衛浴': 0, '廳數': 0}));
+                dispatch(SetSearch('setRoom', {...SearchData.houseInfo.room, '房間': 1,'衛浴': 0, '廳數': 0}));
                 break;
         
             default:
@@ -52,27 +52,27 @@ function ConditionOptions(props) {
 
     const handleChangeRoom = (event, name) => { // 修改房屋格局
         
-        if (event.target.value >= 0) { dispatch(SetSearch('setRoom', {...SearchData.room, [name]: parseInt(event.target.value)})); }
+        if (event.target.value >= 0) { dispatch(SetSearch('setRoom', {...SearchData.houseInfo.room, [name]: parseInt(event.target.value)})); }
         
     }
 
     const handleChangeRent = (event, newValue) => { // 修改租金範圍
-        dispatch(SetSearch('setRent', newValue));
+        dispatch(SetSearch('setPriceRange', newValue));
     }
 
     const handleChangeTextRent = (event, index) => { // 修改租金範圍
-        var value = Array.from(SearchData.rent);
+        var value = Array.from(SearchData.priceRange);
         const newValue = parseInt(event.target.value);
         if (newValue >= 0) {
             value[index] = newValue; // 給予絕對值，不可輸入負值
-            dispatch(SetSearch('setRent', value));
+            dispatch(SetSearch('setPriceRange', value));
         }
     }
     
     const handleCheckTextRent = (event) => { // 檢查上限與下限，進行適當交換
-        var [min, max] = Array.from(SearchData.rent);
+        var [min, max] = Array.from(SearchData.priceRange);
         if (min > max) {
-            dispatch(SetSearch('setRent', [max, min]));
+            dispatch(SetSearch('setPriceRange', [max, min]));
         }
     }
 
@@ -126,8 +126,8 @@ function ConditionOptions(props) {
     const roomProps = (name) => {
         return {
             label: name, 
-            value: SearchData.room[name], 
-            disabled: SearchData.roomType !== null
+            value: SearchData.houseInfo.room[name], 
+            disabled: SearchData.houseInfo.roomType !== null
         }
     }
 
@@ -171,7 +171,7 @@ function ConditionOptions(props) {
         <Grid container columns={16} spacing={2}>
             <Grid item md={16} sx={{ display: 'flex' }}>
                 <Typography {...titleProps('房屋類型：')} />
-                <Tabs value={SearchData.houseType} onChange={handleChangeHouseType} sx={{minHeight: '0' }}>
+                <Tabs value={SearchData.houseInfo.houseType} onChange={handleChangeHouseType} sx={{minHeight: '0' }}>
                     <Tab {...tabProps('不限', null)} />
                     <Tab {...tabProps('公寓', '公寓')} />
                     <Tab {...tabProps('電梯大樓', '電梯大樓')} />
@@ -181,7 +181,7 @@ function ConditionOptions(props) {
             </Grid>
             <Grid item md={16} sx={{ display: 'flex' }}>
                 <Typography {...titleProps('房間類型：')} />
-                <Tabs value={SearchData.roomType} onChange={handleChangeRoomType} sx={{minHeight: '0' }}>
+                <Tabs value={SearchData.houseInfo.roomType} onChange={handleChangeRoomType} sx={{minHeight: '0' }}>
                     <Tab {...tabProps('不限', null)} />
                     <Tab {...tabProps('整層住家', '整層住家')} />
                     <Tab {...tabProps('獨立套房', '獨立套房')} />
@@ -203,12 +203,12 @@ function ConditionOptions(props) {
                 <Box>
                     <Box sx={{ width: '20rem' }}>
                         <Box>
-                            <TextField onChange={(e) => handleChangeTextRent(e, 0)} onBlur={handleCheckTextRent} label='下限' value={SearchData.rent[0]} {...numberProps({width: '9.2rem'})} />
-                            <TextField onChange={(e) => handleChangeTextRent(e, 1)} onBlur={handleCheckTextRent} label='上限' value={SearchData.rent[1]} {...numberProps({width: '9.2rem'})} />
+                            <TextField onChange={(e) => handleChangeTextRent(e, 0)} onBlur={handleCheckTextRent} label='下限' value={SearchData.priceRange[0]} {...numberProps({width: '9.2rem'})} />
+                            <TextField onChange={(e) => handleChangeTextRent(e, 1)} onBlur={handleCheckTextRent} label='上限' value={SearchData.priceRange[1]} {...numberProps({width: '9.2rem'})} />
                         </Box>
                         <Slider
                             sx={{ mx: '0.2rem', width: '18.4rem' }}
-                            value={SearchData.rent}
+                            value={SearchData.priceRange}
                             onChange={handleChangeRent}
                             min={0}
                             step={100}

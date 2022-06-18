@@ -35,43 +35,53 @@ function LocationOptions(props) {
     
     const handleChangeCounty = (event) => {
         const newCounty = event.target.value;
+        dispatch(SetSearch('setCity', newCounty));
         setCounty(newCounty);
     };
     
     useEffect(() => {
-        if (SearchData.areaList[county] !== undefined) {
-            const countyList = new Set(SearchData.areaList[county]);
-            setAll(cityData[county].length === countyList.size);
+        if (SearchData.address.city !== '') {
+            const areaList = new Set(SearchData.address.township);
+            setAll(cityData[county].length === areaList.size);
         }
+        // if (SearchData.areaList[county] !== undefined) {
+        //     const countyList = new Set(SearchData.areaList[county]);
+        //     setAll(cityData[county].length === countyList.size);
+        // }
     }, [county]);
 
     const handleChangeArea = (event) => {
         const checked = event.target.checked;
         const name = event.target.name;
-        const countyList = new Set(SearchData.areaList[county]);
+        const areaList = new Set(SearchData.address.township);
+        // const countyList = new Set(SearchData.areaList[county]);
         if (name === '不限') {
             if (!checked) {
-                cityData[county].map((area) =>  countyList.delete(area['AreaName']) );
+                cityData[county].map((area) =>  areaList.delete(area['AreaName']) );
             } else {
-                cityData[county].map((area) =>  countyList.add(area['AreaName']) );
+                cityData[county].map((area) =>  areaList.add(area['AreaName']) );
             }
             setAll(checked);
 
         } else {
             if (!checked) {
-                countyList.delete(name);
+                areaList.delete(name);
             } else {
-                countyList.add(name);
+                areaList.add(name);
             }
-            setAll(cityData[county].length === countyList.size);
+            setAll(cityData[county].length === areaList.size);
         }
-        dispatch(SetSearch('setAreaList', {...SearchData.areaList, [county]: Array.from(countyList)}));
+        dispatch(SetSearch('setTownship', Array.from(areaList)));
+        // dispatch(SetSearch('setAreaList', {...SearchData.areaList, [county]: Array.from(areaList)}));
     };
     function isChecked(area) {
-        return new Set(SearchData.areaList[county]).has(area);
+        return new Set(SearchData.address.township).has(area);
+        // return new Set(SearchData.areaList[county]).has(area);
     }
     function hasChecked(county) {
-        return (county in SearchData.areaList && SearchData.areaList[county].length > 0);
+        return (SearchData.address.city === county);
+        // return (county in SearchData.areaList && SearchData.areaList[county].length > 0);
+        // return (county in SearchData.areaList && SearchData.areaList[county].length > 0);
     }
 
     return (
