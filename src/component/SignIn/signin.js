@@ -16,27 +16,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useDispatch } from "react-redux";
 import { SetMember } from "../../Actions";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="about">
-        Period-end Report
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 const theme = createTheme();
-
-
 
 export default function SignIn() {
   const dispatch = useDispatch();
@@ -45,7 +25,7 @@ export default function SignIn() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get("email"),
+      username: data.get("username"),
       password: data.get("password"),
     });
     // SetStoreMember
@@ -70,7 +50,7 @@ export default function SignIn() {
             <AccountCircleIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            登入
           </Typography>
           <Box
             component="form"
@@ -82,10 +62,10 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="使用者暱稱"
+              name="username"
+              autoComplete="username"
               autoFocus
             />
             <TextField
@@ -93,14 +73,14 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="密碼"
               type="password"
               id="password"
               autoComplete="current-password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              label="記得我"
             />
             <Button
               type="submit"
@@ -109,16 +89,15 @@ export default function SignIn() {
               endIcon={<SendIcon />}
               sx={{ mt: 3, mb: 2 }}
             >
-              SIGN IN
+              登入
             </Button>
             <Grid container>
               <Grid item>
-                <Link to="./signup">Don't have an account? Sign Up</Link>
+                <Link to="./signup">還沒有帳號嗎? 註冊</Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );

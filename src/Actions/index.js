@@ -1,6 +1,6 @@
 export const SetMember = (username) => {
     return{
-        type:"SetMember",
+        type:"SetMemberUserName",
         payload:{
             username:username
         }
